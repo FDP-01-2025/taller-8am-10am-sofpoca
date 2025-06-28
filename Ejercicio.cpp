@@ -90,36 +90,41 @@ void modificarEstudiante() {
 
 // -----------------------------
 // 👇 TU TAREA: Completa esta función (DELETE)
+// Escribe aquí la función que elimine un estudiante por su carnet.
+// Puedes usar o no el manejo de archivos.
+// Si lo haces con archivos, ganarás **2 puntos extra**.
 void eliminarEstudiante() {
-    // Escribe aquí la función que elimine un estudiante por su carnet.
-    // Puedes usar o no el manejo de archivos.
-    // Si lo haces con archivos, ganarás **2 puntos extra**.
     string carnetBuscado;
     cout<<"Ingresa el carnet de el estudiante a eliminar: ";
     cin>>carnetBuscado;
+    //Abrimos los achivos donde vamos a acceder a los estudiantes ya guardados y otro donde vamos a guardar temporalmente solo los que no vamos
+    //a eliminar
     ifstream archivo("estudiantes.txt");
     ofstream auxiliar("aux.txt");
     if(!archivo.is_open() || !auxiliar.is_open()){
         cout<<"Error al abrir el archivo\n";
+        //si el archivo no se abrio imprimimos error
     }
     else{
         bool encontrado=false;
+        //Esta variable servira para saber si se encontro a algun estudiante con el carnet buscado
         Estudiante a;
         while(archivo>>a.nombre>>a.carnet>>a.edad){
             if(a.carnet==carnetBuscado){
                 encontrado=true;
                 continue;
+                //si lo encontramos, no lo guardamos
             }
             else{
                 auxiliar<<a.nombre<<" "<<a.carnet<<" "<<a.edad<<endl;
+                //si no, si se guarda
             }
         }
-        // ifstream auxiliar("aux.txt");
-        // ofstream archivo("estudiantes.txt");
         auxiliar.close();
         archivo.close();
         remove("estudiantes.txt");
         rename("aux.txt", "estudiantes.txt");
+        // se cierran los archivos y se reemplaza, el archivo con las eliminaciones por el original
         if(!encontrado){
             cout<<"El estudiante de canet: "<<carnetBuscado<<" no se encontro\n";
         }
