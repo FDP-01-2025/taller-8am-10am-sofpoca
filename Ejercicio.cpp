@@ -129,7 +129,7 @@ void eliminarEstudiante() {
             cout<<"El estudiante de canet: "<<carnetBuscado<<" no se encontro\n";
         }
         else{
-            cout<<"Estudiante eliminado con exito\n";
+            cout<<"Estudiante eliminado con exito!\n";
         }
     }
 }
